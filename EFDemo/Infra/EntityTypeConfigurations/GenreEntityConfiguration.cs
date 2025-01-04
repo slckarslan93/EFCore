@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EFDemo.Infra.EntityTypeConfigurations
 {
-    public class GenericEntityConfiguration :BaseEntityTypeConfiguration<GenreEntity>
+    public class GenreEntityConfiguration :BaseEntityTypeConfiguration<GenreEntity>
     {
         public override void Configure(EntityTypeBuilder<GenreEntity> builder)
         {

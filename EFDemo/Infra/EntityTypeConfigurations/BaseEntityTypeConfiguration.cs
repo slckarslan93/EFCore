@@ -18,15 +18,4 @@ namespace EFDemo.Infra.EntityTypeConfigurations
             builder.Property(e => e.ModifiedDate).HasColumnType("datetime2").IsRequired(false);
         }
     }
-
-    public class PersonBaseEntityTypeConfiguration<TEntity> : BaseEntityTypeConfiguration<TEntity> where TEntity : PersonBaseEntity
-    {
-        public override void Configure(EntityTypeBuilder<TEntity> builder)
-        {
-            builder.Property(e => e.FirstName).HasMaxLength(100);
-            builder.Property(e => e.LastName).HasMaxLength(100);
-
-            base.Configure(builder);
-        }
-    }
 }

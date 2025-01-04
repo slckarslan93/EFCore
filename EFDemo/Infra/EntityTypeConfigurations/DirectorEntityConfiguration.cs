@@ -7,9 +7,7 @@ namespace EFDemo.Infra.EntityTypeConfigurations
     {
         public override void Configure(EntityTypeBuilder<DirectorEntity> builder)
         {
-            builder.HasMany(d => d.Movies)
-                .WithOne(m => m.Director)
-                .HasForeignKey(m => m.DirectorId);
+           
 
             base.Configure(builder);
         }
