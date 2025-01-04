@@ -26,6 +26,13 @@ namespace EFDemo.Infra.Context
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             var connstr = configuration.GetConnectionString("SqlServer");
 
+            optionsBuilder.UseSqlServer(connstr, options =>
+            {
+                options.CommandTimeout(5_000);
+                options.EnableRetryOnFailure(maxRetryCount : 5);
+
+            });
+
         }
     }
 }
