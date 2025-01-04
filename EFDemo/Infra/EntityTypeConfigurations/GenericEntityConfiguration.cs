@@ -22,13 +22,4 @@ namespace EFDemo.Infra.EntityTypeConfigurations
             base.Configure(builder);
         }
     }
-
-    public class DirectorEntityConfiguration : PersonBaseEntityTypeConfiguration<DirectorEntity>
-    {
-        public override void Configure(EntityTypeBuilder<DirectorEntity> builder)
-        {
-
-            base.Configure(builder);
-        }
-    }
 }
