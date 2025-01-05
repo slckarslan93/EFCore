@@ -1,4 +1,4 @@
-﻿namespace EFDemo.Infra
+﻿namespace EFDemo2
 {
     internal class Program
     {
