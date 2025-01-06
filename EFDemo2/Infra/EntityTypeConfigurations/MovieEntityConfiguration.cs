@@ -28,7 +28,7 @@ namespace EFDemo2.Infra.EntityTypeConfigurations
 
             builder.HasOne(m => m.Genre)
                 .WithMany(g => g.Movies)
-                .HasForeignKey(m => m.DirectorId);
+                .HasForeignKey(m => m.GenreId);
 
             builder.HasMany(m => m.Actors)
                 .WithMany(a => a.Movies)
