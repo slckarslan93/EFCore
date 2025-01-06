@@ -16,6 +16,7 @@ namespace EFDemo2.Infra.EntityTypeConfigurations
             builder.ToTable(name: "Actors", schema: "ef");
 
 
+
             base.Configure(builder);
         }
     }
