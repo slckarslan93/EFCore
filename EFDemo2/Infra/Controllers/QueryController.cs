@@ -1,4 +1,5 @@
 ﻿using EFDemo2.Infra.Context;
+using EFDemo2.Infra.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,5 +50,44 @@ namespace EFDemo2.Infra.Controllers
 
             public int MovieCount { get; set; }
         }
+
+        public void QueryableTest()
+        {
+            var filter = new MovieQueryFilter(MinViewCount: 5,
+                                              MaxViewCount: null,
+                                              FromCreatedDate: null,
+                                              ToCreatedDate: null,
+                                              Name: null);
+
+            IQueryable<MovieEntity> query = dbContext.Movies.AsQueryable();
+
+            if (filter.MinViewCount.HasValue)
+                query = query.Where(i => i.ViewCount >= filter.MinViewCount.Value);
+
+            if (filter.MaxViewCount.HasValue)
+                query = query.Where(i => i.ViewCount <= filter.MaxViewCount.Value);
+
+            if (filter.FromCreatedDate.HasValue)
+                query = query.Where(i => i.CreatedDate >= filter.FromCreatedDate.Value);
+
+            if (filter.ToCreatedDate.HasValue)
+                query = query.Where(i => i.CreatedDate <= filter.ToCreatedDate.Value);
+
+            if (!string.IsNullOrEmpty(filter.Name))
+                query = query.Where(i => i.Name.Contains(filter.Name));
+
+            var movies = query.ToList();
+
+            foreach (var item in movies)
+            {
+                Console.WriteLine("Movie Name : {0}", item.Name);
+            }
+        }
+
+        public record MovieQueryFilter(int? MinViewCount,
+                               int? MaxViewCount,
+                               DateTime? FromCreatedDate,
+                               DateTime? ToCreatedDate,
+                               string Name);
     }
 }
