@@ -89,5 +89,33 @@ namespace EFDemo2.Infra.Controllers
                                DateTime? FromCreatedDate,
                                DateTime? ToCreatedDate,
                                string Name);
+
+
+
+        public void ChangeTrackerTest()
+        {
+            dbContext.Genres.Add(new GenreEntity()
+            {
+                CreatedDate = DateTime.Now,
+                Name = "Tracking_Test_Genre"
+            });
+
+            var firstGenre = dbContext.Genres
+                .First(i => i.Name == "Interceptor_Test_Genre");
+
+            firstGenre.Name = "TEST";
+            dbContext.Entry(firstGenre).Property(i => i.ModifiedDate).CurrentValue = DateTime.MaxValue;
+
+            dbContext.ChangeTracker.AutoDetectChangesEnabled = false;
+            //dbContext.Remove(firstGenre);
+
+            Console.WriteLine(dbContext.ChangeTracker.DebugView.LongView);
+
+
+            //dbContext.SaveChanges();
+
+            //dbContext.ChangeTracker.DetectChanges();
+        }
     }
+
 }
