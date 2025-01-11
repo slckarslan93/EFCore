@@ -1,5 +1,6 @@
 ﻿using EFDemo2.Infra.Context;
 using EFDemo2.Infra.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -115,6 +116,22 @@ namespace EFDemo2.Infra.Controllers
             //dbContext.SaveChanges();
 
             //dbContext.ChangeTracker.DetectChanges();
+        }
+
+
+
+        public void SplitQueryTests()
+        {
+            //dbContext.Movies
+            //         .Include(i => i.Photos)
+            //         .AsSplitQuery()
+            //         .ToList();
+
+            dbContext.Directors
+                     .Include(i => i.Movies)
+                     .AsSplitQuery()
+                     //.Select(i => new { i.FirstName, i.Movies.Count })
+                     .ToList();
         }
     }
 
